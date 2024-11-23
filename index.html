@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+    <div class="w-full h-screen bg-[#202830] flex justify-center items-center">
+        <div class="container w-auto px-3 py-10 rounded-md border border-[#3D444D]">
+            <div class="mb-6 flex items-center gap-4">
+                <input 
+                    type="number" 
+                    id="yearInput" 
+                    class="bg-[#2D3439] text-white px-3 py-2 rounded-md border border-[#3D444D] w-32"
+                    placeholder="Enter year"
+                    value="2024"
+                >
+                <button 
+                    onclick="generateGraph()"
+                    class="bg-[#3D444D] text-white px-4 py-2 rounded-md hover:bg-[#4D545D] transition-colors"
+                >
+                    Generate
+                </button>
+            </div>
+            <div id="graphContainer">
+                <!-- Grid will be dynamically inserted here -->
+            </div>
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>
