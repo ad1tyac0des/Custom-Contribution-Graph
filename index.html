@@ -24,6 +24,34 @@
                     placeholder="Enter text pattern"
                     maxlength="8"
                 >
+                <select 
+                    id="alignmentInput" 
+                    class="bg-[#2D3439] text-white px-3 py-2 rounded-md border border-[#3D444D]"
+                    onchange="updateAlignment(this.value)"
+                >
+                    <option value="left">Left</option>
+                    <option value="center" selected>Center</option>
+                    <option value="right">Right</option>
+                </select>
+                <div class="flex items-center gap-2">
+                    <label class="text-white text-sm">Random Contributions</label>
+                    <div class="relative inline-block w-12 h-6 transition duration-200 ease-in-out">
+                        <input 
+                            type="checkbox" 
+                            id="randomToggle"
+                            class="hidden"
+                            onchange="generateGraph()"
+                        >
+                        <label 
+                            for="randomToggle"
+                            class="toggle-label block overflow-hidden h-6 rounded-full bg-[#2D3439] border border-[#3D444D] cursor-pointer"
+                        >
+                            <span
+                                class="block h-5 w-5 ml-0.5 mt-0.5 rounded-full transform duration-200 ease-in-out bg-[#3D444D]"
+                            ></span>
+                        </label>
+                    </div>
+                </div>
                 <button 
                     onclick="generateGraph()"
                     class="bg-[#3D444D] text-white px-4 py-2 rounded-md hover:bg-[#4D545D] transition-colors"
@@ -31,12 +59,49 @@
                     Generate
                 </button>
             </div>
+            <div class="mb-4 flex items-center gap-4">
+                <div class="flex items-center gap-2">
+                    <label class="text-white text-sm">Min Intensity:</label>
+                    <input 
+                        type="number" 
+                        id="minIntensity" 
+                        min="0" 
+                        max="3" 
+                        value="0"
+                        class="bg-[#2D3439] text-white px-3 py-1 rounded-md border border-[#3D444D] w-16"
+                        onchange="generateGraph()"
+                    >
+                </div>
+                <div class="flex items-center gap-2">
+                    <label class="text-white text-sm">Max Intensity:</label>
+                    <input 
+                        type="number" 
+                        id="maxIntensity" 
+                        min="1" 
+                        max="4" 
+                        value="3"
+                        class="bg-[#2D3439] text-white px-3 py-1 rounded-md border border-[#3D444D] w-16"
+                        onchange="generateGraph()"
+                    >
+                </div>
+            </div>
             <div id="maxCharsInfo" class="text-gray-400 text-sm mb-4"></div>
             <div id="graphContainer">
                 <!-- Grid will be dynamically inserted here -->
             </div>
         </div>
     </div>
+    
+    <style>
+        /* Toggle button styles */
+        #randomToggle:checked + .toggle-label span {
+            transform: translateX(1.5rem);
+            background-color: #4D545D;
+        }
+        #randomToggle:checked + .toggle-label {
+            background-color: #3D444D;
+        }
+    </style>
     
     <script src="script.js"></script>
 </body>

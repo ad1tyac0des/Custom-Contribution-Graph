@@ -17,6 +17,10 @@ const CONFIG = {
     marginCols: 1,         // Margin columns on each side
     marginRows: 1,         // Margin rows on top/bottom
     patternAlignment: 'center',  // Can be 'left', 'center', or 'right'
+    randomContribution: {
+        minIntensity: 0,  // Minimum contribution level (0-3)
+        maxIntensity: 2   // Maximum contribution level (1-4)
+    }
 };
 
 // Add your patterns object here
@@ -127,6 +131,10 @@ function generateGraph() {
     createContributionGraph(year, text);
 }
 
+function getRandomContributionLevel(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
 function createContributionGraph(year, text) {
     const container = document.getElementById('graphContainer');
     const maxCharsInfo = document.getElementById('maxCharsInfo');
@@ -151,13 +159,21 @@ function createContributionGraph(year, text) {
         text = text.substring(0, maxChars);
     }
 
-    // Create contribution matrix
-    const contributionMatrix = Array(7).fill().map(() => Array(totalWeeks).fill(0));
-    
+    const randomEnabled = document.getElementById('randomToggle').checked;
+    const minIntensity = parseInt(document.getElementById('minIntensity').value);
+    const maxIntensity = parseInt(document.getElementById('maxIntensity').value);
+
+    // Create contribution matrix with random background if enabled
+    const contributionMatrix = Array(7).fill().map(() => 
+        Array(totalWeeks).fill().map(() => 
+            randomEnabled ? getRandomContributionLevel(minIntensity, maxIntensity) : 0
+        )
+    );
+
     // Calculate starting column based on alignment
     const startingColumn = calculatePatternStartColumn(totalWeeks, text.length);
     
-    // Fill pattern for each character
+    // Fill pattern for each character (this will overwrite any random contributions)
     text.split('').forEach((char, charIndex) => {
         if (!patterns[char]) {
             console.warn(`Pattern not found for character: ${char}`);
@@ -172,8 +188,9 @@ function createContributionGraph(year, text) {
             for (let col = 0; col < CONFIG.patternGridSize; col++) {
                 const matrixRow = row + CONFIG.marginRows;
                 const matrixCol = col + startCol;
-                if (matrixCol < totalWeeks) { // Ensure we don't exceed grid bounds
-                    contributionMatrix[matrixRow][matrixCol] = pattern[row][col] ? 4 : 0;
+                if (matrixCol < totalWeeks) {
+                    contributionMatrix[matrixRow][matrixCol] = pattern[row][col] ? 4 : 
+                        (randomEnabled ? contributionMatrix[matrixRow][matrixCol] : 0);
                 }
             }
         }
@@ -285,6 +302,11 @@ function createDaysLabels() {
     });
     
     return daysContainer;
+}
+
+function updateAlignment(value) {
+    CONFIG.patternAlignment = value;
+    generateGraph();
 }
 
 // Initialize with current year when page loads
