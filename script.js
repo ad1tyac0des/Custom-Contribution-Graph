@@ -501,6 +501,9 @@ function generateGraph() {
     }
 
     createContributionGraph(year, text);
+
+    // Enable export button after successful pattern generation
+    enableExportButton();
 }
 
 function getRandomContributionLevel(min, max) {
