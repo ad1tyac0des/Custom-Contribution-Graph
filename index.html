@@ -1,180 +1,178 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GitHub Contribution Pattern Generator</title>
+    <title>GitHub Contribution Pattern</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         /* Toggle button styles */
-        #randomToggle:checked + .toggle-label span {
+        #randomToggle:checked+.toggle-label span {
             transform: translateX(1.5rem);
             background-color: #4D545D;
         }
-        #randomToggle:checked + .toggle-label {
+
+        #randomToggle:checked+.toggle-label {
             background-color: #3D444D;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+
+            #advancedSettings {
+                width: 100%;
+            }
+
+            .month-label {
+                font-size: 0.7rem;
+            }
+
+            .day-label {
+                font-size: 0.7rem;
+            }
+        }
+
+        /* Add smooth scrolling for the container */
+        .overflow-x-auto {
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: thin;
+            scrollbar-color: #3D444D transparent;
+        }
+
+        /* Custom scrollbar styles */
+        .overflow-x-auto::-webkit-scrollbar {
+            height: 6px;
+        }
+
+        .overflow-x-auto::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        .overflow-x-auto::-webkit-scrollbar-thumb {
+            background-color: #3D444D;
+            border-radius: 3px;
         }
     </style>
 </head>
+
 <body>
-    <div class="w-full h-screen bg-[#202830] flex justify-center items-center">
-        <div class="container w-auto px-3 py-10 rounded-md border border-[#3D444D] relative">
-            <button 
-                onclick="toggleAdvancedSettings()"
-                class="absolute top-10 right-3 bg-[#3D444D] text-white px-3 py-3 rounded-md hover:bg-[#4D545D] transition-colors text-sm flex items-center gap-2"
-            >
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+    <div class="w-full min-h-screen bg-[#202830] flex justify-center items-center p-4">
+        <div class="container max-w-screen-2xl overflow-x-auto px-3 py-10 rounded-md border border-[#3D444D] relative">
+            <button onclick="toggleAdvancedSettings()"
+                class="absolute top-10 right-3 bg-[#3D444D] text-white px-3 py-3 rounded-md hover:bg-[#4D545D] transition-colors text-sm flex items-center gap-2">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                 </svg>
             </button>
-            <div class="mb-6 flex items-center gap-4">
-                <input 
-                    type="number" 
-                    id="yearInput" 
-                    class="bg-[#2D3439] text-white px-3 py-2 rounded-md border border-[#3D444D] w-32"
-                    placeholder="Enter year"
-                    value="2024"
-                >
-                <input 
-                    type="text" 
-                    id="textInput" 
-                    class="bg-[#2D3439] text-white px-3 py-2 rounded-md border border-[#3D444D] w-48"
-                    placeholder="Enter text pattern"
-                    maxlength="8"
-                >
-                <select 
-                    id="alignmentInput" 
-                    class="bg-[#2D3439] text-white px-3 py-2 rounded-md border border-[#3D444D]"
-                    onchange="updateAlignment(this.value)"
-                >
-                    <option value="left">Left</option>
-                    <option value="center" selected>Center</option>
-                    <option value="right">Right</option>
-                </select>
-                <div class="flex items-center gap-2">
-                    <label class="text-white text-sm">Random Contributions</label>
-                    <div class="relative inline-block w-12 h-6 transition duration-200 ease-in-out">
-                        <input 
-                            type="checkbox" 
-                            id="randomToggle"
-                            class="hidden"
-                            onchange="generateGraph()"
-                        >
-                        <label 
-                            for="randomToggle"
-                            class="toggle-label block overflow-hidden h-6 rounded-full bg-[#2D3439] border border-[#3D444D] cursor-pointer"
-                        >
-                            <span
-                                class="block h-5 w-5 ml-0.5 mt-0.5 rounded-full transform duration-200 ease-in-out bg-[#3D444D]"
-                            ></span>
-                        </label>
+            <div class="mb-6 flex flex-col md:flex-row items-start md:items-center gap-4 flex-wrap">
+                <div class="flex flex-wrap gap-4">
+                    <input type="number" id="yearInput"
+                        class="bg-[#2D3439] text-white px-3 py-2 rounded-md border border-[#3D444D] w-24 md:w-32"
+                        placeholder="Year" value="2024">
+                    <input type="text" id="textInput"
+                        class="bg-[#2D3439] text-white px-3 py-2 rounded-md border border-[#3D444D] w-full sm:w-48"
+                        placeholder="Text pattern" maxlength="8">
+                    <select id="alignmentInput"
+                        class="bg-[#2D3439] text-white px-3 py-2 rounded-md border border-[#3D444D] w-full sm:w-auto"
+                        onchange="updateAlignment(this.value)">
+                        <option value="left">Left</option>
+                        <option value="center" selected>Center</option>
+                        <option value="right">Right</option>
+                    </select>
+                </div>
+
+                <div class="flex flex-wrap items-center gap-4">
+                    <div class="flex items-center gap-2">
+                        <label class="text-white text-sm whitespace-nowrap">Random Contributions</label>
+                        <div class="relative inline-block w-12 h-6 transition duration-200 ease-in-out">
+                            <input type="checkbox" id="randomToggle" class="hidden" onchange="generateGraph()">
+                            <label for="randomToggle"
+                                class="toggle-label block overflow-hidden h-6 rounded-full bg-[#2D3439] border border-[#3D444D] cursor-pointer">
+                                <span
+                                    class="block h-5 w-5 ml-0.5 mt-0.5 rounded-full transform duration-200 ease-in-out bg-[#3D444D]"></span>
+                            </label>
+                        </div>
                     </div>
+                    <button onclick="generateGraph()"
+                        class="bg-[#3D444D] text-white px-4 py-2 rounded-md hover:bg-[#4D545D] transition-colors w-full sm:w-auto">
+                        Generate
+                    </button>
                 </div>
-                <button 
-                    onclick="generateGraph()"
-                    class="bg-[#3D444D] text-white px-4 py-2 rounded-md hover:bg-[#4D545D] transition-colors"
-                >
-                    Generate
-                </button>
             </div>
-            <div class="mb-4 flex items-center gap-4">
+            <div class="mb-4 flex flex-col sm:flex-row items-start sm:items-center gap-4">
                 <div class="flex items-center gap-2">
-                    <label class="text-white text-sm">Min Intensity:</label>
-                    <input 
-                        type="number" 
-                        id="minIntensity" 
-                        min="0" 
-                        max="3" 
-                        value="0"
+                    <label class="text-white text-sm whitespace-nowrap">Min Intensity:</label>
+                    <input type="number" id="minIntensity" min="0" max="3" value="0"
                         class="bg-[#2D3439] text-white px-3 py-1 rounded-md border border-[#3D444D] w-16"
-                        onchange="generateGraph()"
-                    >
+                        onchange="generateGraph()">
                 </div>
                 <div class="flex items-center gap-2">
-                    <label class="text-white text-sm">Max Intensity:</label>
-                    <input 
-                        type="number" 
-                        id="maxIntensity" 
-                        min="1" 
-                        max="4" 
-                        value="3"
+                    <label class="text-white text-sm whitespace-nowrap">Max Intensity:</label>
+                    <input type="number" id="maxIntensity" min="1" max="4" value="3"
                         class="bg-[#2D3439] text-white px-3 py-1 rounded-md border border-[#3D444D] w-16"
-                        onchange="generateGraph()"
-                    >
+                        onchange="generateGraph()">
                 </div>
             </div>
             <div id="maxCharsInfo" class="text-gray-400 text-sm mb-4"></div>
-            <div id="graphContainer">
-                <!-- Grid will be dynamically inserted here -->
+            <div class="overflow-x-auto pb-4">
+                <div id="graphContainer">
+                    <!-- Grid will be dynamically inserted here -->
+                </div>
             </div>
         </div>
     </div>
-    
+
     <!-- Advanced settings modal -->
-    <div id="advancedSettings" class="fixed right-0 top-0 h-full w-96 bg-[#202830] transform translate-x-full transition-transform duration-300 border-l border-[#3D444D] overflow-y-auto">
+    <div id="advancedSettings"
+        class="fixed right-0 top-0 h-full w-full sm:w-96 bg-[#202830] transform translate-x-full transition-transform duration-300 border-l border-[#3D444D] overflow-y-auto z-50">
         <div class="p-6">
             <div class="flex items-center justify-between mb-4">
                 <h2 class="text-white text-lg font-semibold">Advanced Settings</h2>
-                <button 
-                    onclick="toggleAdvancedSettings()"
-                    class="text-gray-400 hover:text-white"
-                >
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                <button onclick="toggleAdvancedSettings()" class="text-gray-400 hover:text-white">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M6 18L18 6M6 6l12 12" />
                     </svg>
                 </button>
             </div>
             <div class="space-y-4">
                 <div class="flex flex-col gap-2">
                     <label class="text-white text-sm">Cell Size (px)</label>
-                    <input 
-                        type="number" 
-                        id="cellSize" 
-                        value="15"
+                    <input type="number" id="cellSize" value="15"
                         class="bg-[#2D3439] text-white px-3 py-2 rounded-md border border-[#3D444D]"
-                        onchange="updateConfig('cellSize', this.value)"
-                    >
+                        onchange="updateConfig('cellSize', this.value)">
                 </div>
                 <div class="flex flex-col gap-2">
                     <label class="text-white text-sm">Cell Gap (px)</label>
-                    <input 
-                        type="number" 
-                        id="cellGap" 
-                        value="2"
+                    <input type="number" id="cellGap" value="2"
                         class="bg-[#2D3439] text-white px-3 py-2 rounded-md border border-[#3D444D]"
-                        onchange="updateConfig('cellGap', this.value)"
-                    >
+                        onchange="updateConfig('cellGap', this.value)">
                 </div>
                 <div class="flex flex-col gap-2">
                     <label class="text-white text-sm">Pattern Spacing</label>
-                    <input 
-                        type="number" 
-                        id="patternSpacing" 
-                        value="1"
+                    <input type="number" id="patternSpacing" value="1"
                         class="bg-[#2D3439] text-white px-3 py-2 rounded-md border border-[#3D444D]"
-                        onchange="updateConfig('patternSpacing', this.value)"
-                    >
+                        onchange="updateConfig('patternSpacing', this.value)">
                 </div>
                 <div class="flex flex-col gap-2">
                     <label class="text-white text-sm">Margin Columns</label>
-                    <input 
-                        type="number" 
-                        id="marginCols" 
-                        value="1"
+                    <input type="number" id="marginCols" value="1"
                         class="bg-[#2D3439] text-white px-3 py-2 rounded-md border border-[#3D444D]"
-                        onchange="updateConfig('marginCols', this.value)"
-                    >
+                        onchange="updateConfig('marginCols', this.value)">
                 </div>
                 <div class="flex flex-col gap-2">
                     <label class="text-white text-sm">Margin Rows</label>
-                    <input 
-                        type="number" 
-                        id="marginRows" 
-                        value="1"
+                    <input type="number" id="marginRows" value="1"
                         class="bg-[#2D3439] text-white px-3 py-2 rounded-md border border-[#3D444D]"
-                        onchange="updateConfig('marginRows', this.value)"
-                    >
+                        onchange="updateConfig('marginRows', this.value)">
                 </div>
             </div>
         </div>
@@ -183,4 +181,5 @@
     <script src="script.js"></script>
     <script src="export.js"></script>
 </body>
+
 </html>

@@ -1,6 +1,6 @@
 // Configuration options
 const CONFIG = {
-    cellSize: 15,
+    cellSize: 20,
     cellGap: 2,
     minYear: 1900,
     maxYear: 9999,
@@ -518,7 +518,7 @@ function createContributionGraph(year, text) {
     const monthsContainer = document.createElement("div");
     monthsContainer.className =
         "relative flex h-8 mx-8 mb-2 text-sm text-gray-400";
-    monthsContainer.style.paddingLeft = `${MONTH_LABELS_PADDING}px`;
+    monthsContainer.style.paddingLeft = `${window.innerWidth < 768 ? 20 : MONTH_LABELS_PADDING}px`;
 
     const startDate = new Date(year, 0, 1);
     const lastDay = new Date(year, 11, 31);
@@ -717,6 +717,7 @@ function updateAlignment(value) {
 // Initialize with current year when page loads
 document.addEventListener("DOMContentLoaded", () => {
     generateGraph();
+    updateGraphSize();
 });
 
 // Advanced settings
@@ -753,3 +754,43 @@ document.addEventListener("DOMContentLoaded", () => {
 
     generateGraph();
 });
+
+// Add these functions to handle responsive behavior
+function updateGraphSize() {
+    const container = document.getElementById("graphContainer");
+    const containerWidth = container.offsetWidth;
+    
+    // Adjust cell size based on container width
+    if (containerWidth < 768) { // mobile
+        CONFIG.cellSize = 10;
+        CONFIG.cellGap = 2;
+    } else if (containerWidth < 1024) { // tablet
+        CONFIG.cellSize = 12;
+        CONFIG.cellGap = 2;
+    } else { // desktop
+        CONFIG.cellSize = 15;
+        CONFIG.cellGap = 2;
+    }
+
+    // Update advanced settings inputs
+    document.getElementById("cellSize").value = CONFIG.cellSize;
+    document.getElementById("cellGap").value = CONFIG.cellGap;
+
+    generateGraph();
+}
+
+// Add resize listener
+window.addEventListener('resize', debounce(updateGraphSize, 250));
+
+// Debounce function to prevent too many resize events
+function debounce(func, wait) {
+    let timeout;
+    return function executedFunction(...args) {
+        const later = () => {
+            clearTimeout(timeout);
+            func(...args);
+        };
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+    };
+}
