@@ -11,8 +11,6 @@ const CONFIG = {
         'bg-[#26a641]',
         'bg-[#39d353]'
     ],
-    monthLabelsPadding: 30,
-    patternGridSize: 5,    // Size of each character pattern
     patternSpacing: 1,     // Spacing between patterns
     marginCols: 1,         // Margin columns on each side
     marginRows: 1,         // Margin rows on top/bottom
@@ -23,7 +21,11 @@ const CONFIG = {
     }
 };
 
-// Add your patterns object here
+// Constants that shouldn't be configurable
+const MONTH_LABELS_PADDING = 30;  // Fixed padding needed for day labels
+const PATTERN_GRID_SIZE = 5;      // Fixed size matching our 5x5 pattern matrices
+
+// Patterns
 const patterns = {
     // Numbers (keeping existing patterns)
     '0': [[1,1,1,1,1],[1,0,0,0,1],[1,0,0,0,1],[1,0,0,0,1],[1,1,1,1,1]],
@@ -95,12 +97,12 @@ const patterns = {
 
 function calculateMaxChars(totalWeeks) {
     const usableWeeks = totalWeeks - (2 * CONFIG.marginCols);
-    return Math.floor(usableWeeks / (CONFIG.patternGridSize + CONFIG.patternSpacing));
+    return Math.floor(usableWeeks / (PATTERN_GRID_SIZE + CONFIG.patternSpacing));
 }
 
 function calculatePatternStartColumn(totalWeeks, textLength) {
     const usableWeeks = totalWeeks - (2 * CONFIG.marginCols);
-    const totalPatternWidth = textLength * (CONFIG.patternGridSize + CONFIG.patternSpacing) - CONFIG.patternSpacing;
+    const totalPatternWidth = textLength * (PATTERN_GRID_SIZE + CONFIG.patternSpacing) - CONFIG.patternSpacing;
     
     switch (CONFIG.patternAlignment) {
         case 'left':
@@ -142,7 +144,7 @@ function createContributionGraph(year, text) {
     // Create month labels container
     const monthsContainer = document.createElement('div');
     monthsContainer.className = 'relative flex h-8 mx-8 mb-2 text-sm text-gray-400';
-    monthsContainer.style.paddingLeft = `${CONFIG.monthLabelsPadding}px`;
+    monthsContainer.style.paddingLeft = `${MONTH_LABELS_PADDING}px`;
     
     const startDate = new Date(year, 0, 1);
     const lastDay = new Date(year, 11, 31);
@@ -181,11 +183,11 @@ function createContributionGraph(year, text) {
         }
 
         const pattern = patterns[char];
-        const startCol = startingColumn + charIndex * (CONFIG.patternGridSize + CONFIG.patternSpacing);
+        const startCol = startingColumn + charIndex * (PATTERN_GRID_SIZE + CONFIG.patternSpacing);
         
         // Apply pattern
-        for (let row = 0; row < CONFIG.patternGridSize; row++) {
-            for (let col = 0; col < CONFIG.patternGridSize; col++) {
+        for (let row = 0; row < PATTERN_GRID_SIZE; row++) {
+            for (let col = 0; col < PATTERN_GRID_SIZE; col++) {
                 const matrixRow = row + CONFIG.marginRows;
                 const matrixCol = col + startCol;
                 if (matrixCol < totalWeeks) {
@@ -287,7 +289,7 @@ function createContributionGraph(year, text) {
 function createDaysLabels() {
     const daysContainer = document.createElement('div');
     daysContainer.className = 'flex flex-col text-sm text-gray-400 pr-2';
-    daysContainer.style.width = `${CONFIG.monthLabelsPadding}px`;
+    daysContainer.style.width = `${MONTH_LABELS_PADDING}px`;
     
     const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
     days.forEach((day) => {
