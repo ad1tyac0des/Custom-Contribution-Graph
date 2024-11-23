@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>GitHub Contribution Pattern Generator</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body>
@@ -17,6 +17,13 @@
                     placeholder="Enter year"
                     value="2024"
                 >
+                <input 
+                    type="text" 
+                    id="textInput" 
+                    class="bg-[#2D3439] text-white px-3 py-2 rounded-md border border-[#3D444D] w-48"
+                    placeholder="Enter text pattern"
+                    maxlength="8"
+                >
                 <button 
                     onclick="generateGraph()"
                     class="bg-[#3D444D] text-white px-4 py-2 rounded-md hover:bg-[#4D545D] transition-colors"
@@ -24,6 +31,7 @@
                     Generate
                 </button>
             </div>
+            <div id="maxCharsInfo" class="text-gray-400 text-sm mb-4"></div>
             <div id="graphContainer">
                 <!-- Grid will be dynamically inserted here -->
             </div>
