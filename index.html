@@ -5,10 +5,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GitHub Contribution Pattern Generator</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Toggle button styles */
+        #randomToggle:checked + .toggle-label span {
+            transform: translateX(1.5rem);
+            background-color: #4D545D;
+        }
+        #randomToggle:checked + .toggle-label {
+            background-color: #3D444D;
+        }
+    </style>
 </head>
 <body>
     <div class="w-full h-screen bg-[#202830] flex justify-center items-center">
-        <div class="container w-auto px-3 py-10 rounded-md border border-[#3D444D]">
+        <div class="container w-auto px-3 py-10 rounded-md border border-[#3D444D] relative">
+            <button 
+                onclick="toggleAdvancedSettings()"
+                class="absolute top-10 right-3 bg-[#3D444D] text-white px-3 py-3 rounded-md hover:bg-[#4D545D] transition-colors text-sm flex items-center gap-2"
+            >
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                </svg>
+            </button>
             <div class="mb-6 flex items-center gap-4">
                 <input 
                     type="number" 
@@ -92,17 +111,75 @@
         </div>
     </div>
     
-    <style>
-        /* Toggle button styles */
-        #randomToggle:checked + .toggle-label span {
-            transform: translateX(1.5rem);
-            background-color: #4D545D;
-        }
-        #randomToggle:checked + .toggle-label {
-            background-color: #3D444D;
-        }
-    </style>
-    
+    <!-- Advanced settings modal -->
+    <div id="advancedSettings" class="fixed right-0 top-0 h-full w-96 bg-[#202830] transform translate-x-full transition-transform duration-300 border-l border-[#3D444D] overflow-y-auto">
+        <div class="p-6">
+            <div class="flex items-center justify-between mb-4">
+                <h2 class="text-white text-lg font-semibold">Advanced Settings</h2>
+                <button 
+                    onclick="toggleAdvancedSettings()"
+                    class="text-gray-400 hover:text-white"
+                >
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
+            </div>
+            <div class="space-y-4">
+                <div class="flex flex-col gap-2">
+                    <label class="text-white text-sm">Cell Size (px)</label>
+                    <input 
+                        type="number" 
+                        id="cellSize" 
+                        value="15"
+                        class="bg-[#2D3439] text-white px-3 py-2 rounded-md border border-[#3D444D]"
+                        onchange="updateConfig('cellSize', this.value)"
+                    >
+                </div>
+                <div class="flex flex-col gap-2">
+                    <label class="text-white text-sm">Cell Gap (px)</label>
+                    <input 
+                        type="number" 
+                        id="cellGap" 
+                        value="2"
+                        class="bg-[#2D3439] text-white px-3 py-2 rounded-md border border-[#3D444D]"
+                        onchange="updateConfig('cellGap', this.value)"
+                    >
+                </div>
+                <div class="flex flex-col gap-2">
+                    <label class="text-white text-sm">Pattern Spacing</label>
+                    <input 
+                        type="number" 
+                        id="patternSpacing" 
+                        value="1"
+                        class="bg-[#2D3439] text-white px-3 py-2 rounded-md border border-[#3D444D]"
+                        onchange="updateConfig('patternSpacing', this.value)"
+                    >
+                </div>
+                <div class="flex flex-col gap-2">
+                    <label class="text-white text-sm">Margin Columns</label>
+                    <input 
+                        type="number" 
+                        id="marginCols" 
+                        value="1"
+                        class="bg-[#2D3439] text-white px-3 py-2 rounded-md border border-[#3D444D]"
+                        onchange="updateConfig('marginCols', this.value)"
+                    >
+                </div>
+                <div class="flex flex-col gap-2">
+                    <label class="text-white text-sm">Margin Rows</label>
+                    <input 
+                        type="number" 
+                        id="marginRows" 
+                        value="1"
+                        class="bg-[#2D3439] text-white px-3 py-2 rounded-md border border-[#3D444D]"
+                        onchange="updateConfig('marginRows', this.value)"
+                    >
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script src="script.js"></script>
 </body>
 </html>
