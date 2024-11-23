@@ -742,10 +742,30 @@ function updateConfig(key, value) {
     } else {
         CONFIG[key] = value;
     }
+    
+    // Mark that user has custom settings
+    localStorage.setItem('hasCustomSettings', 'true');
+    
     generateGraph();
 }
+
+// Add a reset function for advanced settings
+function resetAdvancedSettings() {
+    localStorage.removeItem('hasCustomSettings');
+    updateGraphSize();
+}
+
 // Initialize advanced settings inputs with current config values
 document.addEventListener("DOMContentLoaded", () => {
+    // Check if there are custom settings
+    const hasCustomSettings = localStorage.getItem('hasCustomSettings');
+    
+    if (!hasCustomSettings) {
+        // Initial size update based on screen size
+        updateGraphSize();
+    }
+    
+    // Update input values
     document.getElementById("cellSize").value = CONFIG.cellSize;
     document.getElementById("cellGap").value = CONFIG.cellGap;
     document.getElementById("patternSpacing").value = CONFIG.patternSpacing;
@@ -760,21 +780,26 @@ function updateGraphSize() {
     const container = document.getElementById("graphContainer");
     const containerWidth = container.offsetWidth;
     
-    // Adjust cell size based on container width
-    if (containerWidth < 768) { // mobile
-        CONFIG.cellSize = 10;
-        CONFIG.cellGap = 2;
-    } else if (containerWidth < 1024) { // tablet
-        CONFIG.cellSize = 12;
-        CONFIG.cellGap = 2;
-    } else { // desktop
-        CONFIG.cellSize = 15;
-        CONFIG.cellGap = 2;
-    }
+    // Only update defaults if user hasn't changed them manually
+    const hasCustomSettings = localStorage.getItem('hasCustomSettings');
+    
+    if (!hasCustomSettings) {
+        // Adjust cell size based on container width
+        if (containerWidth < 768) { // mobile
+            CONFIG.cellSize = 10;
+            CONFIG.cellGap = 2;
+        } else if (containerWidth < 1024) { // tablet
+            CONFIG.cellSize = 12;
+            CONFIG.cellGap = 2;
+        } else { // desktop
+            CONFIG.cellSize = 15;
+            CONFIG.cellGap = 2;
+        }
 
-    // Update advanced settings inputs
-    document.getElementById("cellSize").value = CONFIG.cellSize;
-    document.getElementById("cellGap").value = CONFIG.cellGap;
+        // Update advanced settings inputs
+        document.getElementById("cellSize").value = CONFIG.cellSize;
+        document.getElementById("cellGap").value = CONFIG.cellGap;
+    }
 
     generateGraph();
 }

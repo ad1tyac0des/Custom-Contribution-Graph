@@ -115,7 +115,7 @@
                 </div>
                 <div class="flex items-center gap-2">
                     <label class="text-white text-sm whitespace-nowrap">Max Intensity:</label>
-                    <input type="number" id="maxIntensity" min="1" max="4" value="3"
+                    <input type="number" id="maxIntensity" min="1" max="4" value="2"
                         class="bg-[#2D3439] text-white px-3 py-1 rounded-md border border-[#3D444D] w-16"
                         onchange="generateGraph()">
                 </div>
@@ -173,6 +173,15 @@
                     <input type="number" id="marginRows" value="1"
                         class="bg-[#2D3439] text-white px-3 py-2 rounded-md border border-[#3D444D]"
                         onchange="updateConfig('marginRows', this.value)">
+                </div>
+                <div class="pt-4 border-t border-[#3D444D]">
+                    <button onclick="resetAdvancedSettings()" 
+                            class="w-full bg-[#3D444D] text-white px-4 py-2 rounded-md hover:bg-[#4D545D] transition-colors flex items-center justify-center gap-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                        </svg>
+                        Reset to Defaults
+                    </button>
                 </div>
             </div>
         </div>
