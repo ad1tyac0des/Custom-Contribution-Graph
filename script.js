@@ -11,10 +11,10 @@ const CONFIG = {
         "bg-[#26a641]",
         "bg-[#39d353]",
     ],
-    patternSpacing: 1, // Spacing between patterns
-    marginCols: 1, // Margin columns on each side
-    marginRows: 1, // Margin rows on top/bottom
-    patternAlignment: "center", // Can be 'left', 'center', or 'right'
+    patternSpacing: 1,
+    marginCols: 1,
+    marginRows: 1, 
+    patternAlignment: "center",
     randomContribution: {
         minIntensity: 0, // Minimum contribution level (0-3)
         maxIntensity: 2, // Maximum contribution level (1-4)
@@ -583,7 +583,6 @@ function createContributionGraph(year, text) {
         }
     });
 
-    // Create month labels
     const months = [
         "Jan",
         "Feb",
@@ -761,7 +760,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const hasCustomSettings = localStorage.getItem('hasCustomSettings');
     
     if (!hasCustomSettings) {
-        // Initial size update based on screen size
         updateGraphSize();
     }
     
@@ -775,7 +773,6 @@ document.addEventListener("DOMContentLoaded", () => {
     generateGraph();
 });
 
-// Add these functions to handle responsive behavior
 function updateGraphSize() {
     const container = document.getElementById("graphContainer");
     const containerWidth = container.offsetWidth;
