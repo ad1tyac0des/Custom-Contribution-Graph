@@ -721,8 +721,13 @@ function updateAlignment(value) {
     generateGraph();
 }
 
-// Initialize with current year when page loads
+// Initialize with default text and current year when page loads
 document.addEventListener("DOMContentLoaded", () => {
+    const textInput = document.getElementById("textInput");
+
+    if (!textInput.value) {
+        textInput.value = "ADYTYA";
+    }
     generateGraph();
     updateGraphSize();
 });
