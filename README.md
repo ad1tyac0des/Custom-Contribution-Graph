@@ -7,6 +7,9 @@
 [![Date Export](https://img.shields.io/badge/Date_Export-FF1493?style=for-the-badge&logo=markdown&logoColor=white)](#features)
 [![Interactive Preview](https://img.shields.io/badge/Interactive_Preview-9400D3?style=for-the-badge&logo=react&logoColor=white)](#features)
 [![Real Contributions](https://img.shields.io/badge/Real_Contributions-8A2BE2?style=for-the-badge&logo=git&logoColor=white)](#features)
+<br>
+
+[![View Live](https://img.shields.io/badge/View_Live-000000?style=for-the-badge&logo=googlechrome&logoColor=white)](https://ad1tyac0des.github.io/custom-github-profile-patterns/)
 
 <b>GitHub Contribution Pattern Generator</b>
 <p>
@@ -47,6 +50,12 @@ Ever wanted to write your name or a special number in your GitHub contribution g
    <br>
 
    > **💡 Pro Tip**: Make the same number of contributions for each marked date to ensure a consistent pattern intensity. For example, if you choose to make 4 contributions on one date, maintain 4 contributions for all pattern dates.
+
+## 🚀 How to Use
+
+1. Enter the text/numbers/special characters you want to appear in the contribution graph
+2. Preview how it will look in the contribution graph
+3. Get your contribution schedule by clicking the "Export" button or by hovering over the cells
 
 ## ⚠️ Important Notes
 
