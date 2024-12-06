@@ -3,66 +3,66 @@
 
 <img src="assets/images/banner.png" alt="GitHub Contribution Pattern Generator" width="100%">
 
-[![Customizable Patterns](https://img.shields.io/badge/Customizable_Patterns-4B0082?style=for-the-badge&logo=github&logoColor=white)](#features)
-[![Date Export](https://img.shields.io/badge/Date_Export-FF1493?style=for-the-badge&logo=markdown&logoColor=white)](#features)
-[![Interactive Preview](https://img.shields.io/badge/Interactive_Preview-9400D3?style=for-the-badge&logo=react&logoColor=white)](#features)
-[![Real Contributions](https://img.shields.io/badge/Real_Contributions-8A2BE2?style=for-the-badge&logo=git&logoColor=white)](#features)
-<br>
+[![Pattern Planning](https://img.shields.io/badge/Pattern_Planning-4B0082?style=for-the-badge&logo=github&logoColor=white)](#features)
+[![Image Export](https://img.shields.io/badge/Image_Export-FF1493?style=for-the-badge)](#features)
+[![Interactive Preview](https://img.shields.io/badge/Interactive_Preview-9400D3?style=for-the-badge)](#features)
 
-[![View Live](https://img.shields.io/badge/View_Live-000000?style=for-the-badge&logo=googlechrome&logoColor=white)](https://ad1tyac0des.github.io/custom-github-profile-patterns/)
+[![Get Started](https://img.shields.io/badge/Start_Creating-FCBFBD?style=for-the-badge&logo=arc&logoColor=000)](https://ad1tyac0des.github.io/custom-github-profile-patterns/)
 
 <b>GitHub Contribution Pattern Generator</b>
-<p>
-  Create amazing patterns in your GitHub contribution graph.
-</p>
+<p>Design your pattern once, choose how to use it - as real contributions or as an image</p>
 </div>
 
 ## 📑 Table of Contents
-- [Why This Tool?](#-why-this-tool)
+- [Features](#-features)
 - [How It Works](#️-how-it-works)
+- [Usage Guide](#-usage-guide)
 - [Important Notes](#️-important-notes)
 - [License](#-license)
 - [Connect With Me](#-connect-with-me)
 
-## 🤔 Why This Tool?
+## ✨ Features
 
-Ever wanted to write your name or a special number in your GitHub contribution graph but didn't know which days to contribute on? This tool solves that problem by:
+After designing your pattern, this tool offers two ways to use it:
 
-1. Showing you a preview of how your pattern will look
-2. Generating a list of specific dates when you need to make real contributions
-3. Helping you plan your contribution pattern months in advance
+### 1. As Real Contributions
+- Export a schedule of dates for making real GitHub contributions
+- Get exact dates when you need to contribute
+- Preview how your pattern will look
+- Perfect for creating actual GitHub contribution patterns
+
+### 2. As an Image
+- Export your pattern as a PNG instantly
+- Use the exported image in:
+  - GitHub README files
+  - Profile banners
+  - Social media
+  - Presentations
 
 ## ⚙️ How It Works
 
-1. **🎨 Plan Your Pattern**
-   - Choose the year you want to create the pattern in
-   - Enter the text/numbers you want to appear (max 8 characters)
-   - Preview how it will look in the contribution graph
+### Basic Pattern Creation
+1. Enter your desired text/pattern (max 8 characters)
+2. Choose the target year
+3. Preview the pattern
+4. Choose your export method:
 
-2. **📊 Get Your Contribution Schedule**
-   1. **⚡ Interactive Preview**: 
-      - Hover over any colored cell in the pattern to see the exact date you need to contribute on
-      - Each colored cell represents a day requiring contribution
-   2. **💾 Export Full Schedule**: 
-      - Click "Export" to get a markdown file with all required contribution dates
-      - The file includes a complete day-by-day schedule organized in a table format
-   
-   <br>
+#### For Real Contributions:
+- Keep "Random Contributions" OFF
+- Export the contribution schedule
+- Follow the schedule to make real contributions
 
-   > **💡 Pro Tip**: Make the same number of contributions for each marked date to ensure a consistent pattern intensity. For example, if you choose to make 4 contributions on one date, maintain 4 contributions for all pattern dates.
-
-## 🚀 How to Use
-
-1. Enter the text/numbers/special characters you want to appear in the contribution graph
-2. Preview how it will look in the contribution graph
-3. Get your contribution schedule by clicking the "Export" button or by hovering over the cells
+#### For Images:
+- You could either Toggle "Random Contributions" ON or OFF
+- Export as PNG
+- Use immediately anywhere
 
 ## ⚠️ Important Notes
 
-- 🔧 This is a planning tool, not a graph modifier
-- ✨ You still need to make real contributions on the specified dates
-- 📌 Contributions must be made on the exact dates to create the pattern
-- ⏳ Plan ahead - patterns might require several months of consistent contributions
+- For real contributions: requires consistent GitHub activity on specified dates
+- For images: instant export, no real contributions needed
+- Plan ahead for real contribution patterns
+- Images can be used immediately
 
 ## 📄 License
 
@@ -73,7 +73,6 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 ---
 
 <div align="center">
-
 
 ### 🤝 Connect With Me
 
