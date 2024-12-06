@@ -5,9 +5,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Custom Contribution Graph</title>
-    <link rel="icon" href="images/fav.png" type="image/x-icon">
+    <link rel="icon" href="assets/images/fav.png" type="image/x-icon">
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
+        @font-face {
+            font-family: 'General';
+            src: url('/assets/fonts/GeneralSans-Regular.woff2') format('woff2');
+        }
+
+        * {
+            font-family: 'General', sans-serif;
+        }
+
         /* Toggle button styles */
         #randomToggle:checked+.toggle-label span {
             transform: translateX(1.5rem);
@@ -36,14 +45,12 @@
             }
         }
 
-        /* Add smooth scrolling for the container */
         .overflow-x-auto {
             -webkit-overflow-scrolling: touch;
             scrollbar-width: thin;
             scrollbar-color: #3D444D transparent;
         }
 
-        /* Custom scrollbar styles */
         .overflow-x-auto::-webkit-scrollbar {
             height: 6px;
         }
@@ -60,7 +67,7 @@
 </head>
 
 <body>
-    <div class="w-full min-h-screen bg-[#202830] flex justify-center items-center p-4">
+    <div class="relative w-full min-h-screen bg-[#202830] flex justify-center items-center p-4">
         <div class="container max-w-screen-2xl overflow-x-auto px-3 py-10 rounded-md border border-[#3D444D] relative">
             <button onclick="toggleAdvancedSettings()"
                 class="absolute top-10 right-3 bg-[#3D444D] text-white px-3 py-3 rounded-md hover:bg-[#4D545D] transition-colors text-sm flex items-center gap-2">
@@ -90,7 +97,7 @@
                 </div>
 
                 <div class="flex flex-wrap items-center gap-4">
-                    
+
                     <button onclick="generateGraph()"
                         class="bg-[#3D444D] text-white px-4 py-2 rounded-md hover:bg-[#4D545D] transition-colors w-full sm:w-auto">
                         Generate
@@ -98,7 +105,7 @@
                 </div>
             </div>
             <div id="maxCharsInfo" class="text-gray-400 text-sm mb-4"></div>
-            
+
             <div class="mb-4 flex flex-col sm:flex-row items-start sm:items-center gap-4">
                 <div class="flex items-center gap-2">
                     <label class="text-white text-sm whitespace-nowrap">Random Contributions</label>
@@ -114,9 +121,9 @@
                 <div id="intensityControls" class="hidden sm:flex items-center gap-4">
                     <div class="flex items-center gap-2">
                         <label class="text-white text-sm whitespace-nowrap">Min Intensity:</label>
-                        <select id="minIntensity" 
-                                class="bg-[#2D3439] text-white px-3 py-1 rounded-md border border-[#3D444D] w-16 outline-none"
-                                onchange="generateGraph()">
+                        <select id="minIntensity"
+                            class="bg-[#2D3439] text-white px-3 py-1 rounded-md border border-[#3D444D] w-16 outline-none"
+                            onchange="generateGraph()">
                             <option value="0">0</option>
                             <option value="1">1</option>
                             <option value="2">2</option>
@@ -125,11 +132,11 @@
                     </div>
                     <div class="flex items-center gap-2">
                         <label class="text-white text-sm whitespace-nowrap">Max Intensity:</label>
-                        <select id="maxIntensity" 
-                                class="bg-[#2D3439] text-white px-3 py-1 rounded-md border border-[#3D444D] w-16 outline-none"
-                                onchange="generateGraph()">
+                        <select id="maxIntensity"
+                            class="bg-[#2D3439] text-white px-3 py-1 rounded-md border border-[#3D444D] w-16 outline-none"
+                            onchange="generateGraph()">
                             <option value="1">1</option>
-                            <option value="2">2</option>
+                            <option value="2" selected>2</option>
                             <option value="3">3</option>
                             <option value="4">4</option>
                         </select>
@@ -142,6 +149,21 @@
                     <!-- Grid will be dynamically inserted here -->
                 </div>
             </div>
+        </div>
+
+        <!-- Github star button -->
+        <div class="group absolute bottom-8 right-8 flex items-center">
+            <span
+                class="text-white text-sm px-3 py-3 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                Star this project
+            </span>
+            <a href="https://github.com/ad1tyac0des/custom-github-profile-patterns" target="_blank"
+                class="group inline-flex items-center gap-2 px-3 py-3 bg-[#2D3439] hover:bg-[#3D444D] text-white rounded-md transition-colors duration-300">
+                <span>
+                    <img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Microsoft-Teams-Animated-Emojis/master/Emojis/Travel%20and%20places/Star.png"
+                        class="w-6 group-hover:scale-[1.3] transition-transform duration-300" alt="star">
+                </span>
+            </a>
         </div>
     </div>
 
@@ -191,10 +213,12 @@
                         onchange="updateConfig('marginRows', this.value)">
                 </div>
                 <div class="pt-4 border-t border-[#3D444D]">
-                    <button onclick="resetAdvancedSettings()" 
-                            class="w-full bg-[#3D444D] text-white px-4 py-2 rounded-md hover:bg-[#4D545D] transition-colors flex items-center justify-center gap-2">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                    <button onclick="resetAdvancedSettings()"
+                        class="w-full bg-[#3D444D] text-white px-4 py-2 rounded-md hover:bg-[#4D545D] transition-colors flex items-center justify-center gap-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
                         </svg>
                         Reset to Defaults
                     </button>
