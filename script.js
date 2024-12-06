@@ -631,6 +631,7 @@ function createContributionGraph(year, text) {
 
     // Create the contribution grid
     const grid = document.createElement("div");
+    grid.id = "cellContainer";
     grid.className = "grid grid-rows-7 grid-flow-col";
     grid.style.gap = `${CONFIG.cellGap}px`;
 
