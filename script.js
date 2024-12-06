@@ -485,6 +485,14 @@ function calculatePatternStartColumn(totalWeeks, textLength) {
     }
 }
 
+function handleRandomToggle() {
+    const randomToggle = document.getElementById('randomToggle');
+    const intensityControls = document.getElementById('intensityControls');
+    
+    intensityControls.style.display = randomToggle.checked ? 'flex' : 'none';
+    generateGraph();
+}
+
 function generateGraph() {
     const graphContainer = document.getElementById("graphContainer");
     const maxCharsInfo = document.getElementById("maxCharsInfo");
@@ -770,6 +778,10 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("marginCols").value = CONFIG.marginCols;
     document.getElementById("marginRows").value = CONFIG.marginRows;
 
+    // intensity controls visibility
+    const intensityControls = document.getElementById('intensityControls');
+    intensityControls.style.display = 'none';
+    
     generateGraph();
 });
 
@@ -800,7 +812,6 @@ function updateGraphSize() {
 
     generateGraph();
 }
-
 // Add resize listener
 window.addEventListener('resize', debounce(updateGraphSize, 250));
 
