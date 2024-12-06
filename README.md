@@ -1,7 +1,7 @@
 <div align="center">
 
 
-<img src="images/banner.png" alt="GitHub Contribution Pattern Generator" width="100%">
+<img src="assets/images/banner.png" alt="GitHub Contribution Pattern Generator" width="100%">
 
 [![Customizable Patterns](https://img.shields.io/badge/Customizable_Patterns-4B0082?style=for-the-badge&logo=github&logoColor=white)](#features)
 [![Date Export](https://img.shields.io/badge/Date_Export-FF1493?style=for-the-badge&logo=markdown&logoColor=white)](#features)
