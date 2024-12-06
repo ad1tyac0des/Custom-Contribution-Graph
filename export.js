@@ -62,13 +62,17 @@ function createExportButtons() {
     document.getElementById('scheduleExportOption').onclick = exportToReadme;
 }
 
-function exportToPNG() {
+async function exportToPNG() {
     const cellContainer = document.getElementById("cellContainer");
 
-    html2canvas(cellContainer, {
-        backgroundColor: "#202830",
-        scale: 2,
-    }).then(canvas => {
+    cellContainer.classList.add("pl-4", "py-5");
+    await new Promise(requestAnimationFrame);
+    try {
+        const canvas = await html2canvas(cellContainer, {
+            backgroundColor: "#202830",
+            scale: 2,
+        });
+        
         canvas.toBlob(function(blob) {
             const url = URL.createObjectURL(blob);
             const link = document.createElement('a');
@@ -77,7 +81,9 @@ function exportToPNG() {
             link.click();
             URL.revokeObjectURL(url);
         }, 'image/png');
-    });
+    } finally {
+        cellContainer.classList.remove("pl-4", "py-5");
+    }
 }
 
 function enableExportButton() {
