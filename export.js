@@ -25,6 +25,8 @@ function createExportButton() {
 // Update the enableExportButton function
 function enableExportButton() {
     const exportButton = document.getElementById('exportButton');
+    if (!exportButton) return;
+    
     const randomToggle = document.getElementById('randomToggle');
     
     if (randomToggle.checked) {
@@ -36,8 +38,14 @@ function enableExportButton() {
     }
 }
 
-// Add event listener to random toggle
-document.getElementById('randomToggle').addEventListener('change', enableExportButton);
+
+document.addEventListener("DOMContentLoaded", () => {
+    createExportButton();
+    const randomToggle = document.getElementById('randomToggle');
+    if (randomToggle) {
+        randomToggle.addEventListener('change', enableExportButton);
+    }
+});
 
 function exportToReadme() {
     const year = document.getElementById("yearInput").value;
@@ -92,7 +100,4 @@ function exportToReadme() {
     document.body.removeChild(a);
     window.URL.revokeObjectURL(url);
 }
-
-// Initialize export button when page loads
-document.addEventListener("DOMContentLoaded", createExportButton);
 
