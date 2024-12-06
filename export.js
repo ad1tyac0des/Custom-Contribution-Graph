@@ -2,31 +2,49 @@ function createExportButtons() {
     const buttonContainer = document.createElement('div');
     buttonContainer.className = "absolute top-10 right-4 flex gap-2";
 
-    // PNG Export Button
-    const pngButton = document.createElement('button');
-    pngButton.className = "bg-[#3D444D] text-white px-3 py-3 rounded-md hover:bg-[#4D545D] transition-colors text-sm flex items-center gap-2 opacity-50 cursor-not-allowed";
-    pngButton.onclick = exportToPNG;
-    pngButton.disabled = true;
-    pngButton.id = 'pngExportButton';
-    pngButton.innerHTML = `
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4 4m0 0l4-4m-4 4V4"/>
-        </svg>
-        PNG
-    `;
+    const dropdownContainer = document.createElement('div');
+    dropdownContainer.className = "relative";
 
-    const scheduleButton = document.createElement('button');
-    scheduleButton.className = "bg-[#3D444D] text-white px-3 py-3 rounded-md hover:bg-[#4D545D] transition-colors text-sm flex items-center gap-2 opacity-50 cursor-not-allowed";
-    scheduleButton.onclick = exportToReadme;
-    scheduleButton.disabled = true;
-    scheduleButton.id = 'exportButton';
-    scheduleButton.innerHTML = `
+    const exportButton = document.createElement('button');
+    exportButton.className = "bg-[#3D444D] text-white px-3 py-3 rounded-md hover:bg-[#4D545D] transition-colors text-sm flex items-center gap-2";
+    exportButton.innerHTML = `
         <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
         </svg>
-        Schedule
+        Export
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+        </svg>
     `;
 
+    const dropdownMenu = document.createElement('div');
+    dropdownMenu.className = "absolute right-0 mt-2 w-48 rounded-md shadow-lg bg-[#2D343B] ring-1 ring-black ring-opacity-5 hidden";
+    dropdownMenu.innerHTML = `
+        <div class="py-1" role="menu">
+            <button id="pngExportOption" class="w-full text-left px-4 py-2 text-sm text-white hover:bg-[#3D444D] disabled:opacity-50 disabled:cursor-not-allowed" role="menuitem">
+                Export Graph as PNG
+            </button>
+            <button id="scheduleExportOption" class="w-full text-left px-4 py-2 text-sm text-white hover:bg-[#3D444D] disabled:opacity-50 disabled:cursor-not-allowed" role="menuitem">
+                Export Schedule
+            </button>
+        </div>
+    `;
+
+    exportButton.onclick = () => {
+        dropdownMenu.classList.toggle('hidden');
+    };
+
+    document.addEventListener('click', (e) => {
+        if (!dropdownContainer.contains(e.target)) {
+            dropdownMenu.classList.add('hidden');
+        }
+    });
+
+    dropdownContainer.appendChild(exportButton);
+    dropdownContainer.appendChild(dropdownMenu);
+    buttonContainer.appendChild(dropdownContainer);
+
+    // Advanced Settings Button
     const advancedSettingsBtn = document.querySelector('[onclick="toggleAdvancedSettings()"]');
     advancedSettingsBtn.className = "bg-[#3D444D] text-white px-3 py-3 rounded-md hover:bg-[#4D545D] transition-colors text-sm flex items-center gap-2";
     advancedSettingsBtn.innerHTML = `
@@ -36,12 +54,12 @@ function createExportButtons() {
         </svg>
     `;
 
-    buttonContainer.appendChild(pngButton);
-    buttonContainer.appendChild(scheduleButton);
     buttonContainer.appendChild(advancedSettingsBtn);
-
     const container = document.querySelector('.container');
     container.appendChild(buttonContainer);
+
+    document.getElementById('pngExportOption').onclick = exportToPNG;
+    document.getElementById('scheduleExportOption').onclick = exportToReadme;
 }
 
 function exportToPNG() {
@@ -63,23 +81,22 @@ function exportToPNG() {
 }
 
 function enableExportButton() {
-    const scheduleButton = document.getElementById('exportButton');
-    const pngButton = document.getElementById('pngExportButton');
-    if (!scheduleButton || !pngButton) return;
+    const scheduleExportOption = document.getElementById('scheduleExportOption');
+    const pngExportOption = document.getElementById('pngExportOption');
+    if (!scheduleExportOption || !pngExportOption) return;
     
     const randomToggle = document.getElementById('randomToggle');
-    const baseClassName = "bg-[#3D444D] text-white px-3 py-3 rounded-md hover:bg-[#4D545D] transition-colors text-sm flex items-center gap-2";
     
     if (randomToggle.checked) {
-        scheduleButton.disabled = true;
-        scheduleButton.className = `${baseClassName} opacity-50 cursor-not-allowed`;
-        pngButton.disabled = false;
-        pngButton.className = baseClassName;
+        scheduleExportOption.disabled = true;
+        scheduleExportOption.classList.add('opacity-50', 'cursor-not-allowed');
+        pngExportOption.disabled = false;
+        pngExportOption.classList.remove('opacity-50', 'cursor-not-allowed');
     } else {
-        scheduleButton.disabled = false;
-        pngButton.disabled = false;
-        scheduleButton.className = baseClassName;
-        pngButton.className = baseClassName;
+        scheduleExportOption.disabled = false;
+        pngExportOption.disabled = false;
+        scheduleExportOption.classList.remove('opacity-50', 'cursor-not-allowed');
+        pngExportOption.classList.remove('opacity-50', 'cursor-not-allowed');
     }
 }
 
