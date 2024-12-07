@@ -16,7 +16,6 @@
 ## 📑 Table of Contents
 - [Features](#-features)
 - [How It Works](#️-how-it-works)
-- [Usage Guide](#-usage-guide)
 - [Important Notes](#️-important-notes)
 - [License](#-license)
 - [Connect With Me](#-connect-with-me)
